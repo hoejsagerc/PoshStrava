@@ -1,0 +1,2065 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml" xmlns="http://msh">
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-StravaActivities</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>StravaActivities</command:noun>
+      <maml:description>
+        <maml:para>Cmdlet for retriving either a single Strava activity or all the Strava activies from your Strava account</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This cmdlet can be used to retrieve a single Strava activity by the Activity Id, or you can  retrieve all the activites from your account.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-StravaActivities</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:description>
+            <maml:para>The Activity Id of a specific Strava Activity</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>IncludeAllEfforts</maml:name>
+          <maml:description>
+            <maml:para>Switch to define if you want to retrieve all the segment efforts you made on the specific Strava activity. This switch should be used combined with the Id parameter</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AccessToken</maml:name>
+          <maml:description>
+            <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-StravaActivities</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>OutputJson</maml:name>
+          <maml:description>
+            <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>./strava_output.json</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AccessToken</maml:name>
+          <maml:description>
+            <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-StravaActivities</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Page</maml:name>
+          <maml:description>
+            <maml:para>You can define the Page number for the pagination when querying the Strava API by default it will start on page 1</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>1</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>PerPage</maml:name>
+          <maml:description>
+            <maml:para>You can define how many activities you want listed on each page queried from the Strava API</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>200</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AccessToken</maml:name>
+          <maml:description>
+            <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="named" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:description>
+          <maml:para>The Activity Id of a specific Strava Activity</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>IncludeAllEfforts</maml:name>
+        <maml:description>
+          <maml:para>Switch to define if you want to retrieve all the segment efforts you made on the specific Strava activity. This switch should be used combined with the Id parameter</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>OutputJson</maml:name>
+        <maml:description>
+          <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>./strava_output.json</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Page</maml:name>
+        <maml:description>
+          <maml:para>You can define the Page number for the pagination when querying the Strava API by default it will start on page 1</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>1</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>PerPage</maml:name>
+        <maml:description>
+          <maml:para>You can define how many activities you want listed on each page queried from the Strava API</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>200</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AccessToken</maml:name>
+        <maml:description>
+          <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-StravaActivities -Verbose</dev:code>
+        <dev:remarks>
+          <maml:para>This example will retrieve all the activities from your Strava account, and provide Verbose information</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>Get-StravaActivities -Id 1736127843 -IncludeAlEfforts</dev:code>
+        <dev:remarks>
+          <maml:para>This example will retrieve all details on the specific Strava activity with the Id 1736127843</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
+        <dev:code>Get-StravaActivities -OutputJson -Path "~/temp/activities_output.json"</dev:code>
+        <dev:remarks>
+          <maml:para>This example will save a json file with all the strava activies. It will store the file in the path "~/temp/activities_output.json"</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-StravaActivityComments</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>StravaActivityComments</command:noun>
+      <maml:description>
+        <maml:para>Cmdlet for retrieving all comments on an activity</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This cmdlet will return all the comments added to a Strava Activity. The cmdlet can output the result to a json file</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-StravaActivityComments</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:description>
+            <maml:para>The Activity Id of a specific Strava Activity</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>OutputJson</maml:name>
+          <maml:description>
+            <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>./strava_output.json</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Page</maml:name>
+          <maml:description>
+            <maml:para>You can define the Page number for the pagination when querying the Strava API by default it will start on page 1</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>1</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>PerPage</maml:name>
+          <maml:description>
+            <maml:para>You can define how many activities you want listed on each page queried from the Strava API</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>200</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AccessToken</maml:name>
+          <maml:description>
+            <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:description>
+          <maml:para>The Activity Id of a specific Strava Activity</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>OutputJson</maml:name>
+        <maml:description>
+          <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>./strava_output.json</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Page</maml:name>
+        <maml:description>
+          <maml:para>You can define the Page number for the pagination when querying the Strava API by default it will start on page 1</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>1</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>PerPage</maml:name>
+        <maml:description>
+          <maml:para>You can define how many activities you want listed on each page queried from the Strava API</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>200</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AccessToken</maml:name>
+        <maml:description>
+          <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-StravaActivityComments -Id 7551294509</dev:code>
+        <dev:remarks>
+          <maml:para>This example will output an object containing all the comments created on the spicific activity with the Id 7551294509</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>Get-StravaActivityComments -Id 7557894309 -OutputJson -Path ~/temp/strava_output.json</dev:code>
+        <dev:remarks>
+          <maml:para>This example will output all the comments from an activity to a json file and create the file in the path ~/temp/strava_output.json</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-StravaActivityKudoers</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>StravaActivityKudoers</command:noun>
+      <maml:description>
+        <maml:para>Cmdlet for retrieving all comments on an activity</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This cmdlet will return all the kudos added to a Strava Activity. The cmdlet can output the result to a json file</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-StravaActivityKudoers</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:description>
+            <maml:para>The Activity Id of a specific Strava Activity</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>OutputJson</maml:name>
+          <maml:description>
+            <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>./strava_output.json</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Page</maml:name>
+          <maml:description>
+            <maml:para>You can define the Page number for the pagination when querying the Strava API by default it will start on page 1</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>1</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>PerPage</maml:name>
+          <maml:description>
+            <maml:para>You can define how many activities you want listed on each page queried from the Strava API</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>200</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AccessToken</maml:name>
+          <maml:description>
+            <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:description>
+          <maml:para>The Activity Id of a specific Strava Activity</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>OutputJson</maml:name>
+        <maml:description>
+          <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>./strava_output.json</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Page</maml:name>
+        <maml:description>
+          <maml:para>You can define the Page number for the pagination when querying the Strava API by default it will start on page 1</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>1</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>PerPage</maml:name>
+        <maml:description>
+          <maml:para>You can define how many activities you want listed on each page queried from the Strava API</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>200</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AccessToken</maml:name>
+        <maml:description>
+          <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-StravaActivityKudoers -Id 7551294509</dev:code>
+        <dev:remarks>
+          <maml:para>This example will output an object containing all the kudos created on the spicific activity with the Id 7551294509</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>Get-StravaActivityKudoers -Id 7557894309 -OutputJson -Path ~/temp/strava_output.json</dev:code>
+        <dev:remarks>
+          <maml:para>This example will output all the kudos from an activity to a json file and create the file in the path ~/temp/strava_output.json</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-StravaActivityLaps</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>StravaActivityLaps</command:noun>
+      <maml:description>
+        <maml:para>Cmdlet for retrieving all Laps from an activity</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This cmdlet will return all the laps from a Strava Activity. The cmdlet can output the result to a json file</maml:para>
+      <maml:para>This cmdlet required you to have a strava subscription to be able to query the data</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-StravaActivityLaps</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:description>
+            <maml:para>The Activity Id of a specific Strava Activity</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>OutputJson</maml:name>
+          <maml:description>
+            <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>./strava_output.json</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Page</maml:name>
+          <maml:description>
+            <maml:para>You can define the Page number for the pagination when querying the Strava API by default it will start on page 1</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>1</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>PerPage</maml:name>
+          <maml:description>
+            <maml:para>You can define how many activities you want listed on each page queried from the Strava API</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>200</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AccessToken</maml:name>
+          <maml:description>
+            <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:description>
+          <maml:para>The Activity Id of a specific Strava Activity</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>OutputJson</maml:name>
+        <maml:description>
+          <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>./strava_output.json</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Page</maml:name>
+        <maml:description>
+          <maml:para>You can define the Page number for the pagination when querying the Strava API by default it will start on page 1</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>1</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>PerPage</maml:name>
+        <maml:description>
+          <maml:para>You can define how many activities you want listed on each page queried from the Strava API</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>200</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AccessToken</maml:name>
+        <maml:description>
+          <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-StravaActivityLaps -Id 7551294509</dev:code>
+        <dev:remarks>
+          <maml:para>This example will output an object containing all the laps created on the spicific activity with the Id 7551294509</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>Get-StravaActivityLaps -Id 7557894309 -OutputJson -Path ~/temp/strava_output.json</dev:code>
+        <dev:remarks>
+          <maml:para>This example will output all the laps from an activity to a json file and create the file in the path ~/temp/strava_output.json</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-StravaActivityZones</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>StravaActivityZones</command:noun>
+      <maml:description>
+        <maml:para>Cmdlet for retrieving all Zones from an activity</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This cmdlet will return all the zones from a Strava Activity. The cmdlet can output the result to a json file</maml:para>
+      <maml:para>This cmdlet required you to have a strava subscription to be able to query the data</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-StravaActivityZones</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:description>
+            <maml:para>The Activity Id of a specific Strava Activity</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+          <dev:type>
+            <maml:name>Int64</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>0</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>OutputJson</maml:name>
+          <maml:description>
+            <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>./strava_output.json</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Page</maml:name>
+          <maml:description>
+            <maml:para>You can define the Page number for the pagination when querying the Strava API by default it will start on page 1</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>1</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>PerPage</maml:name>
+          <maml:description>
+            <maml:para>You can define how many activities you want listed on each page queried from the Strava API</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>200</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AccessToken</maml:name>
+          <maml:description>
+            <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:description>
+          <maml:para>The Activity Id of a specific Strava Activity</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>OutputJson</maml:name>
+        <maml:description>
+          <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>./strava_output.json</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Page</maml:name>
+        <maml:description>
+          <maml:para>You can define the Page number for the pagination when querying the Strava API by default it will start on page 1</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>1</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>PerPage</maml:name>
+        <maml:description>
+          <maml:para>You can define how many activities you want listed on each page queried from the Strava API</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>200</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AccessToken</maml:name>
+        <maml:description>
+          <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-StravaActivityZones -Id 7551294509</dev:code>
+        <dev:remarks>
+          <maml:para>This example will output an object containing all the zones created on the spicific activity with the Id 7551294509</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+        <dev:code>Get-StravaActivityZones -Id 7557894309 -OutputJson -Path ~/temp/strava_output.json</dev:code>
+        <dev:remarks>
+          <maml:para>This example will output all the Zones from an activity to a json file and create the file in the path ~/temp/strava_output.json</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-StravaAthlete</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>StravaAthlete</command:noun>
+      <maml:description>
+        <maml:para>Cmdlet for retrieving profile information on the authenticated Athlete</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This cmdlet will return the profile information on the current authenticated athlete</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-StravaAthlete</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>OutputJson</maml:name>
+          <maml:description>
+            <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>./strava_output.json</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AccessToken</maml:name>
+          <maml:description>
+            <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>OutputJson</maml:name>
+        <maml:description>
+          <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>./strava_output.json</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AccessToken</maml:name>
+        <maml:description>
+          <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-StravaAthlete</dev:code>
+        <dev:remarks>
+          <maml:para>This example will output an object containing the profile information for the authenticated athlete</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-StravaAthleteStats</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>StravaAthleteStats</command:noun>
+      <maml:description>
+        <maml:para>Cmdlet for retrieving the authenticated athletes stats</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This cmdlet will query the api to first find the currently authenticated atheletes id, and return the athletes stats</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-StravaAthleteStats</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>OutputJson</maml:name>
+          <maml:description>
+            <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>./strava_output.json</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AccessToken</maml:name>
+          <maml:description>
+            <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>OutputJson</maml:name>
+        <maml:description>
+          <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>./strava_output.json</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AccessToken</maml:name>
+        <maml:description>
+          <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-StravaAthleteStats</dev:code>
+        <dev:remarks>
+          <maml:para>This example will output an object containing the athletes stats</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-StravaAthleteZones</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>StravaAthleteZones</command:noun>
+      <maml:description>
+        <maml:para>Cmdlet for retrieving Zones information on the currently authenticated athlete</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This cmdlet will return the heart rate and power zones of the currently authenticated athlete</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-StravaAthleteZones</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>OutputJson</maml:name>
+          <maml:description>
+            <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>./strava_output.json</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>AccessToken</maml:name>
+          <maml:description>
+            <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>OutputJson</maml:name>
+        <maml:description>
+          <maml:para>Switch parameter to define if the output from the command should be saved to a json file</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>If you defined the switch OutputJson, you can define a path to where the file should be stored. If no path is defined, the file will be saved in your current directory as ./strava_output.json</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>./strava_output.json</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>AccessToken</maml:name>
+        <maml:description>
+          <maml:para>Access token to authenticate with the Strava API. If you used the parameter switch -UseSecretStore when you run  the cmdlet Set-StravaAuthentication. The access token is stored in the PowerShell secret store, and should not  be provided to this cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Get-StravaAthleteZones</dev:code>
+        <dev:remarks>
+          <maml:para>This example will output an object containing heart rate and power zones of the currently authenticated athelete</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>New-StravaActivity</command:name>
+      <command:verb>New</command:verb>
+      <command:noun>StravaActivity</command:noun>
+      <maml:description>
+        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>New-StravaActivity</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>Name of the activity you want to create</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>SportType</maml:name>
+          <maml:description>
+            <maml:para>Sport type of activity. For example - Run, MountainBikeRide, Ride, etc.</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Run</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Trail Run</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Walk</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Hike</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Virtual Run</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Ride</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Mountain Bike Ride</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Gravel Bike Ride</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">E-Bike Ride</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">E-Mountain Bike Ride</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Velomobile</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Virtual Ride</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Canoe</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Kayak</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Kitesurf Session</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Row</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Stand Up Paddle</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Surf</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Swim</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Windsurf Session</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Ice Skate</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Alpine Ski</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Backcountry Ski</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Nordic Ski</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Snowboard</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Snowshoe</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Handcycle</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Inline Skate</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Rock Climb</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Roller Ski</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Wheelchair</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Crossfit</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Elliptical</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Stair Stepper</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Weight Training</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Weight Training</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Workout</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>StartDate</maml:name>
+          <maml:description>
+            <maml:para>Must be in ISO 8601 Standard =&gt; '2022-08-10T11:55:10.9626456+02:00' - You can use {Get-Date -Format 'o'}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+          <maml:name>ElapsedTime</maml:name>
+          <maml:description>
+            <maml:para>Elapsed time should be in seconds</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+          <maml:name>Type</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Type Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+          <maml:name>Description</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Description Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+          <maml:name>Distance</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Distance Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Single</command:parameterValue>
+          <dev:type>
+            <maml:name>Single</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+          <maml:name>AccessToken</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill AccessToken Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Commute</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Commute Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>HideFromHome</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill HideFromHome Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Trainer</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Trainer Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+        <maml:name>AccessToken</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill AccessToken Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Commute</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill Commute Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <maml:name>Description</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill Description Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
+        <maml:name>Distance</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill Distance Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Single</command:parameterValue>
+        <dev:type>
+          <maml:name>Single</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
+        <maml:name>ElapsedTime</maml:name>
+        <maml:description>
+          <maml:para>Elapsed time should be in seconds</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>HideFromHome</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill HideFromHome Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:description>
+          <maml:para>Name of the activity you want to create</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>SportType</maml:name>
+        <maml:description>
+          <maml:para>Sport type of activity. For example - Run, MountainBikeRide, Ride, etc.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>StartDate</maml:name>
+        <maml:description>
+          <maml:para>Must be in ISO 8601 Standard =&gt; '2022-08-10T11:55:10.9626456+02:00' - You can use {Get-Date -Format 'o'}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Trainer</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill Trainer Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <maml:name>Type</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill Type Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Set-StravaAuthentication</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>StravaAuthentication</command:noun>
+      <maml:description>
+        <maml:para>Function for setting up your strava authentication for the first time.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This function requires that you have alreaded create the API application in your Strava Account.</maml:para>
+      <maml:para>if you haven't already created a Strava API App you will need to go to url: https://www.strava.com/settings/api Once you have created the API App you should be able to find your API setting under: Strava profile --&gt; Settings --&gt; My API Application</maml:para>
+      <maml:para>Under the panel 'My API Application' you will be able to find: Client ID and Client Secret. These two values you will need to use for this function.</maml:para>
+      <maml:para>When you run the function, a web browser will be opened. Here you will be prompted to Authenticate your application. Once you've pressed the Authenticate button you will be redirected to a localhost page. On this page you will need to  take the 'code' parameter in the URL.</maml:para>
+      <maml:para>It will look similar to: code=32e0113c8a5f7b704570349619c24fa567770e27    &lt;-- You should not take the 'code=' part of the url. Only copy the code.</maml:para>
+      <maml:para>From this code you will generate a new refresh_token which will be used for every api call to authenticate to the API.</maml:para>
+      <maml:para>To save the client_id, client_secret &amp; refresh_token, the function will install a new Secrets Vault named StravaSecrets. If you already have a vault canfigured it will use the password for this vaul, otherwise you will be prompted to create a  new password. This password you will need to use everytime you run a strava command in a new PowerShell session.</maml:para>
+      <maml:para>This function should only be run the first time you want to use the PowerShell Module</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-StravaAuthentication</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>ClientId</maml:name>
+          <maml:description>
+            <maml:para>The Client Id found on your Strava Account. Go to Settings --&gt; My API Application --&gt; Client ID</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>ClientSecret</maml:name>
+          <maml:description>
+            <maml:para>The Client Secret found on your Strava Account. Go to Settings --&gt; My API Application --&gt; Client Secret</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>UseSecretStore</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill UseSecretStore Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>ClientId</maml:name>
+        <maml:description>
+          <maml:para>The Client Id found on your Strava Account. Go to Settings --&gt; My API Application --&gt; Client ID</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>ClientSecret</maml:name>
+        <maml:description>
+          <maml:para>The Client Secret found on your Strava Account. Go to Settings --&gt; My API Application --&gt; Client Secret</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>UseSecretStore</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill UseSecretStore Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes />
+    <command:returnValues />
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <dev:code>Set-StravaAuthentication -ClientId "8121231" -ClientSecret "kl2n1lkn66kln31lk1243kn41n423114lknasdp9"</dev:code>
+        <dev:remarks>
+          <maml:para>This example will Authenticate you to Strava and store the authentication tokens and secret in a PowerShell Secrets Vault.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>https://github.com/ScriptingChris/PoshStrava/blob/main/README.md</maml:linkText>
+        <maml:uri>https://github.com/ScriptingChris/PoshStrava/blob/main/README.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Update-StravaActivity</command:name>
+      <command:verb>Update</command:verb>
+      <command:noun>StravaActivity</command:noun>
+      <maml:description>
+        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Update-StravaActivity</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:description>
+            <maml:para>The Id of the activity you want to update</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>Name of the activity you want to create</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="2" aliases="none">
+          <maml:name>SportType</maml:name>
+          <maml:description>
+            <maml:para>Sport type of activity. For example - Run, MountainBikeRide, Ride, etc.</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Run</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Trail Run</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Walk</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Hike</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Virtual Run</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Ride</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Mountain Bike Ride</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Gravel Bike Ride</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">E-Bike Ride</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">E-Mountain Bike Ride</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Velomobile</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Virtual Ride</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Canoe</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Kayak</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Kitesurf Session</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Row</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Stand Up Paddle</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Surf</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Swim</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Windsurf Session</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Ice Skate</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Alpine Ski</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Backcountry Ski</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Nordic Ski</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Snowboard</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Snowshoe</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Handcycle</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Inline Skate</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Rock Climb</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Roller Ski</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Wheelchair</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Crossfit</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Elliptical</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Stair Stepper</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Weight Training</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Workout</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="3" aliases="none">
+          <maml:name>Description</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Description Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="4" aliases="none">
+          <maml:name>Trainer</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Trainer Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="5" aliases="none">
+          <maml:name>Commute</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill Commute Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="6" aliases="none">
+          <maml:name>HideFromHome</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill HideFromHome Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="5" aliases="none">
+        <maml:name>Commute</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill Commute Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="3" aliases="none">
+        <maml:name>Description</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill Description Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="6" aliases="none">
+        <maml:name>HideFromHome</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill HideFromHome Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:description>
+          <maml:para>The Id of the activity you want to update</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="1" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:description>
+          <maml:para>Name of the activity you want to create</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="2" aliases="none">
+        <maml:name>SportType</maml:name>
+        <maml:description>
+          <maml:para>Sport type of activity. For example - Run, MountainBikeRide, Ride, etc.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="4" aliases="none">
+        <maml:name>Trainer</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill Trainer Description }}</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/ScriptingChris/PoshStrava/blob/main/README.md</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+</helpItems>

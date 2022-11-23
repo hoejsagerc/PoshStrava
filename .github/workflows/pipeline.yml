@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      # Checks-out the repository for the build environment
+      - uses: actions/checkout@v3
+
+      - name: PowerShell Builder Modules Caching
+        uses: potatoqualitee/psmodulecache@v4.5
+        with:
+          modules-to-cache: Microsoft.PowerShell.SecretManagement, Microsoft.PowerShell.SecretStore
+
+      - name: Publish PowerShell Module
+        uses: pcgeek86/publish-powershell-module-action@v19
+        with:
+          # The filesystem path to the module to import into the environment.
+          modulePath: .\Output\PoshStrava\*\PoshStrava.psm1
+          # The NuGet API Key for PowerShell Gallery, with permission to push this module.
+          NuGetApiKey: ${{ secrets.NUGET_API_KEY }}
